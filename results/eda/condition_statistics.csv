@@ -1,0 +1,4 @@
+Condition,Records,Peptides,Proteins,Mean_Area,Median_Area,Std_Area
+EtOH,138425,26254,2918,NaN,NaN,NaN
+LPS,138425,26254,2918,NaN,NaN,NaN
+cntrl,138425,26254,2918,NaN,NaN,NaN

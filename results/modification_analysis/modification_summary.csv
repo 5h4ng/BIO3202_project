@@ -1,0 +1,4 @@
+Category,Total_Peptides,Modified_Peptides,Unmodified_Peptides,Modification_Rate_Percent,Enrichment_Factor,P_Value
+All Peptides,27685,6679,21006,24.1249774245982,1,NaN
+Significant (FDR<0.05),825,234,591,28.3636363636364,1.25416546884414,0.00440427141925248
+Significant (FDR<0.01),489,136,353,27.8118609406953,1.21610319009698,0.0615768270304506

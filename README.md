@@ -48,7 +48,7 @@ run('generate_summary_statistics')
 
 ## References
 
-- **Original Publication:** Dermit, M., et al. (2020). "Peptide correlation analysis (PeCorA) reveals differential proteoform regulation." *Molecular & Cellular Proteomics*, 19(1), 135-146.
+- **Original Publication:** Dermit, M., et al. (2020). "Peptide correlation analysis (PeCorA) reveals differential proteoform regulation." *Journal of Proteome Research*
 - **Original R Package:** https://github.com/jessegmeyerlab/PeCorA
 - **Course:** BIO3202
 

@@ -1,0 +1,3 @@
+Category,Total_Peptides,Modified_Peptides,Unmodified_Peptides,Modification_Rate_Percent
+Significant Peptides (FDR<0.05),825,234,591,28.3636363636364
+Other Peptides,26860,6445,20415,23.9947877885331
