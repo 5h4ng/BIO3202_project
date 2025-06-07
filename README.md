@@ -15,6 +15,19 @@ PeCorA is a statistical method designed to identify peptides that show abundance
 
 The original work was published by Dermit et al. (2020) and implemented as an R package. This project reproduces the key functionality in MATLAB.
 
+## Data
+
+You need first to unzip the data/PeCorA_noZ.csv.zip file to get the data/PeCorA_noZ.csv file.
+
+
+This dataset is used in the original publication. You can find it in the PeCorA repository ([PeCorA data link](https://github.com/jessegmeyerlab/PeCorA/tree/master/inputs)).
+
+
+
+```bash
+unzip data/PeCorA_noZ.csv.zip -d data/
+```
+
 ## Usage
 
 ### Method 1: Automated Execution (Recommended)
@@ -46,10 +59,19 @@ run('generate_figure2_workflow')
 run('generate_summary_statistics')
 ```
 
+## Results
+
+The results are saved in the results directory.
+
+- PeCorA_scaled_peptides.csv: original data with scaled intensities
+- PeCorA_results.csv: statistical results for discordant peptides
+- Summary_Statistics.csv: summary statistics for the analysis
+- A lot of plots 
+
 ## References
 
 - **Original Publication:** Dermit, M., et al. (2020). "Peptide correlation analysis (PeCorA) reveals differential proteoform regulation." *Journal of Proteome Research*
-- **Original R Package:** https://github.com/jessegmeyerlab/PeCorA
+- **Original R Package:** [https://github.com/jessegmeyerlab/PeCorA](https://github.com/jessegmeyerlab/PeCorA)
 - **Course:** BIO3202
 
 ## Attribution
