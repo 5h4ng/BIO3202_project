@@ -1,3 +1,44 @@
+# System files
+.DS_Store
 .cursor/
-*.csv
-*.zip 
+Thumbs.db
+desktop.ini
+
+# Data files (potentially large)
+data/*.csv
+data/*.xlsx
+data/*.mat
+
+results/README.md
+
+# MATLAB temporary files
+*.asv
+*.m~
+*.autosave
+
+# Log files
+*.log
+
+# Documentation that might contain sensitive info
+docs/*.md
+
+# Reference files (potentially copyrighted)
+ref/
+
+# Temporary and backup files
+*~
+*.bak
+*.tmp
+*.temp
+
+# IDE and editor files
+*.swp
+*.swo
+.vscode/
+*.sublime-*
+
+# OS generated files
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+

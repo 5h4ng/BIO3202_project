@@ -1,0 +1,20 @@
+Category	Value
+Analysis Overview	
+Total Peptides Analyzed	26444
+Total Proteins Analyzed	2848
+	
+Significance Thresholds	
+Significant Peptides (FDR < 0.01)	489 (1.8%)
+Significant Peptides (FDR < 0.05)	825 (3.1%)
+Significant Peptides (FDR < 0.1)	1047 (4.0%)
+	
+Protein-Level Results	
+Proteins with Significant Peptides (FDR < 0.01)	416 (14.6%)
+Proteins with Significant Peptides (FDR < 0.05)	635 (22.3%)
+	
+Effect Size Analysis	
+Median |Log2FC| (FDR < 0.05)	0.452
+Mean |Log2FC| (FDR < 0.05)	0.506
+	
+Analysis Date	
+Timestamp	07-Jun-2025 16:33:37

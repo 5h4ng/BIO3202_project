@@ -1,50 +1,48 @@
-% PeCorA Main Script
-% This script demonstrates how to use the PeCorA MATLAB implementation
-
-% Add src directory to MATLAB path
 addpath('src');
 
-try
-    t = readtable('data/PeCorA_noZ.csv');
-catch
-    error('请确保数据文件存在于data目录下，并且文件名正确');
-end
+% 1. Import data
+opts = detectImportOptions('data/PeCorA_noZ.csv');
+opts.VariableNamingRule = 'preserve';
+t = readtable('data/PeCorA_noZ.csv', opts);
 
-% 2. 数据预处理
-fprintf('开始数据预处理...\n');
-scaled_peptides = PeCorA_preprocessing(t, ...
-    8, ...    % 峰面积数据所在的列号
-    100, ...  % 过滤阈值
-    'cntrl'); % 对照组名称
-fprintf('数据预处理完成\n');
+% 2. Data preprocessing
+scaled_peptides = PeCorA_preprocessing(t, 'Normalized Area', 100, 'cntrl');
 
-% 3. 运行PeCorA分析
-fprintf('开始PeCorA分析...\n');
+% 3. Run PeCorA analysis
 disagree_peptides = PeCorA(scaled_peptides);
-fprintf('PeCorA分析完成\n');
 
-% 4. 保存结果
-% 创建results目录（如果不存在）
+% 4. Save results
 if ~exist('results', 'dir')
     mkdir('results');
 end
 
-% 保存分析结果
 writetable(disagree_peptides, 'results/PeCorA_results.csv');
+writetable(scaled_peptides, 'results/PeCorA_scaled_peptides.csv');
 
-% 5. 可视化结果
-fprintf('生成可视化结果...\n');
-% 选择前5个显著差异的肽段进行可视化
-num_plots = min(5, height(disagree_peptides));
-for i = 1:num_plots
-    fig = PeCorA_plotting(disagree_peptides, disagree_peptides(i,:), scaled_peptides);
-    % 保存图形
-    saveas(fig, sprintf('results/PeCorA_plot_%d.png', i));
+% 5. Display summary 
+fprintf('\nPeCorA Analysis Complete\n');
+fprintf('========================\n');
+if height(disagree_peptides) > 0
+    sig_05 = sum(disagree_peptides.adj_pval < 0.05);
+    sig_01 = sum(disagree_peptides.adj_pval < 0.01);
+    sig_proteins = length(unique(disagree_peptides.protein(disagree_peptides.adj_pval < 0.05)));
+    
+    fprintf('Total peptides tested: %d\n', height(disagree_peptides));
+    fprintf('Significant peptides (adj.p < 0.05): %d\n', sig_05);
+    fprintf('Significant peptides (adj.p < 0.01): %d\n', sig_01);
+    fprintf('Proteins with significant peptides: %d\n', sig_proteins);
+    
+    if sig_05 > 0
+        fprintf('\nTop 5 most significant peptides:\n');
+        top5 = disagree_peptides(1:min(5, height(disagree_peptides)), :);
+        for i = 1:height(top5)
+            fprintf('  %s (adj.p = %.2e)\n', top5.peptide{i}, top5.adj_pval(i));
+        end
+    end
+else
+    fprintf('No significant peptides found.\n');
 end
-fprintf('分析完成！结果已保存到results目录\n');
 
-% 显示结果摘要
-fprintf('\n结果摘要:\n');
-fprintf('总分析肽段数: %d\n', height(disagree_peptides));
-fprintf('显著差异肽段数 (p < 0.01): %d\n', sum(disagree_peptides.adj_pval <= 0.01));
-fprintf('显著差异蛋白质数: %d\n', length(unique(disagree_peptides.protein(disagree_peptides.adj_pval <= 0.01)))); 
+fprintf('\nResults saved to results/ directory\n');
+fprintf('Run plot_PeCorA_results to generate visualizations\n');
+    

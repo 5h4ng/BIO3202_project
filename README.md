@@ -1,103 +1,61 @@
 # PeCorA (Peptide Correlation Analysis) - MATLAB Implementation
 
-This is a MATLAB implementation of the PeCorA tool for detecting discordant peptide quantities in shotgun proteomics data.
+## BIO3202 Course Project
 
-## Directory Structure
-```
-PeCorA/
-├── src/                    # Source code directory
-│   ├── PeCorA_preprocessing.m
-│   ├── PeCorA.m
-│   └── PeCorA_plotting.m
-├── data/                   # Data directory
-│   └── PeCorA_noZ.csv     # Your input data file
-├── results/               # Results output directory (created automatically)
-└── run_PeCorA.m          # Main script
-```
+This project is a MATLAB implementation of the PeCorA algorithm as part of the BIO3202 course. The goal is to reproduce the peptide correlation analysis method originally developed in R for detecting discordant peptide quantities in shotgun proteomics data.
 
-## Requirements
-- MATLAB R2019b or newer
-- Statistics and Machine Learning Toolbox
+## Background
 
-## Data Format
-Your input CSV file should contain the following columns:
-- `Peptide_Modified_Sequence`: Peptide sequence (including modifications)
-- `Condition`: Experimental condition/group
-- `BioReplicate`: Biological replicate number
-- `Protein`: Protein identifier
-- At least one column containing peak area data
+PeCorA is a statistical method designed to identify peptides that show abundance changes inconsistent with their parent protein's overall expression pattern. This is particularly useful for detecting:
+
+- Post-translational modifications (PTMs)
+- Protein isoform-specific changes
+- Differential peptide regulation
+- Proteoform-level differences
+
+The original work was published by Dermit et al. (2020) and implemented as an R package. This project reproduces the key functionality in MATLAB.
 
 ## Usage
 
-1. **Prepare Your Data**
-   - Place your CSV data file in the `data` directory
-   - Ensure all required columns are present
-   - Data should not contain missing values
+### Method 1: Automated Execution (Recommended)
 
-2. **Run the Analysis**
-   ```matlab
-   % Method 1: Run the main script directly
-   run('run_PeCorA.m')
-   
-   % Method 2: In MATLAB command window
-   >> cd /path/to/PeCorA
-   >> run_PeCorA
-   ```
+```bash
+# Run complete workflow with default settings
+./run_pecora_workflow.sh
 
-3. **View Results**
-   Results will be saved in the `results` directory:
-   - `PeCorA_results.csv`: Contains all analysis results
-   - `PeCorA_plot_1.png` to `PeCorA_plot_5.png`: Visualizations of top 5 significant peptides
+# Specify custom MATLAB path
+./run_pecora_workflow.sh /Applications/MATLAB_R2023b.app/bin/matlab
 
-## Customizing Parameters
-
-You can modify parameters in `run_PeCorA.m`:
-
-```matlab
-% Modify preprocessing parameters
-scaled_peptides = PeCorA_preprocessing(t, ...
-    8, ...    % Change peak area column number
-    100, ...  % Change filtering threshold
-    'cntrl'); % Change control group name
-
-% Modify number of visualizations
-num_plots = min(5, height(disagree_peptides)); % Change number of plots to generate
+# Use custom input data
+./run_pecora_workflow.sh matlab data/your_data.csv
 ```
 
-## Output Description
+### Method 2: Manual Step-by-Step
 
-1. **Preprocessed Data** (`scaled_peptides`):
-   - Original data columns
-   - `ms1log2`: Log2-transformed peak areas
-   - `ms1scaled`: Normalized values
-   - `ms1adj`: Values adjusted relative to control
+```matlab
+% 1. Main analysis (preprocessing + statistics)
+run_PeCorA
 
-2. **Analysis Results** (`disagree_peptides`):
-   - Significantly different peptides (adj_pval ≤ 0.01)
-   - Sorted by adjusted p-value
+% 2. Individual peptide visualizations
+run('plot_PeCorA_results')
 
-3. **Visualization**:
-   - Boxplots showing peptide expression distribution
-   - Gray: Other peptides
-   - Green: Differential peptide
-   - Individual data points included
+% 3. Workflow demonstration figures
+run('generate_figure2_workflow')
 
-## Troubleshooting
-
-1. **Data File Issues**
-   - Ensure the data file exists in the correct location
-   - Check that column names match exactly
-   - Verify data format is correct
-
-2. **Memory Issues**
-   - For large datasets, ensure sufficient system memory
-   - Consider reducing data size or increasing system virtual memory
-
-3. **MATLAB Errors**
-   - Verify MATLAB version and required toolboxes
-   - Check for any missing dependencies
+% 4. Comprehensive statistical summary
+run('generate_summary_statistics')
+```
 
 ## References
-- Original R package: [PeCorA GitHub Repository](https://github.com/jessegmeyerlab/PeCorA)
-- Documentation: [PeCorA Vignette](docs/PeCorA_vignette.pdf)
-- Research Paper: [Dermit et al. 2020](docs/dermit-et-al-2020-peptide-correlation-analysis-(pecora)-reveals-differential-proteoform-regulation.pdf) 
+
+- **Original Publication:** Dermit, M., et al. (2020). "Peptide correlation analysis (PeCorA) reveals differential proteoform regulation." *Molecular & Cellular Proteomics*, 19(1), 135-146.
+- **Original R Package:** https://github.com/jessegmeyerlab/PeCorA
+- **Course:** BIO3202
+
+## Attribution
+
+This MATLAB implementation was developed as part of BIO3202 coursework. The original algorithm and statistical methods are credited to Dermit et al. (2020).
+
+---
+
+**To run the complete analysis:** Execute `./run_pecora_workflow.sh` in the project directory. 

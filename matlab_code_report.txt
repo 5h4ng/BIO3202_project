@@ -1,0 +1,16 @@
+github.com/AlDanial/cloc v 2.04  T=0.02 s (585.3 files/s, 127917.9 lines/s)
+----------------------------------------------------------------------------------
+File                                           blank        comment           code
+----------------------------------------------------------------------------------
+./generate_summary_figures.m                      91             62            348
+./generate_figure2_workflow.m                     65             39            207
+./src/PeCorA_single_boxplot.m                     43             51            156
+./generate_summary_statistics.m                   46             40            153
+./src/PeCorA.m                                    38             34            129
+./src/PeCorA_preprocessing.m                      34             43            109
+./plot_PeCorA_results.m                           24             21             82
+./src/PeCorA_plotting.m                           13             19             72
+./run_PeCorA.m                                    10              5             33
+----------------------------------------------------------------------------------
+SUM:                                             364            314           1289
+----------------------------------------------------------------------------------
